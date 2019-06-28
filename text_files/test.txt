@@ -1,0 +1,2 @@
+This is a new message that contains text to be converted into morse code,
+and push the test of the string to make it really really long.
