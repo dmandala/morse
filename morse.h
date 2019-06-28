@@ -17,8 +17,10 @@ struct start_options {
     int loop;				// 0 loop forever 1 -10,000 otherwise
     int speed;				// Words Per Minute
     float dot_time;			// Calculated at 60 / (50 dots per word * words)
+    unsigned int dot_time_seconds;		// If the dot time is over 1 second per dot!
     unsigned int dot_time_micro;	// how long is the dot in micro seconds?
     float inter_word_dot_time;		// Different then dot time if Farnsworth applied
+    unsigned int inter_word_dot_time_seconds;
     unsigned int inter_word_dot_time_micro;// how long in micro seconds
     int fd;
     struct stat fileInfo;

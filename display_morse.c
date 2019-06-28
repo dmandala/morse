@@ -12,13 +12,27 @@
 #define OFF 0
 #endif
 
+void timer_wait(int cnt, unsigned int seconds, unsigned int micros)
+{
+    int loop;
+    for (loop=0;loop<cnt;loop++){
+        // Set a timer and sleep for a 7 dots
+        if(seconds){
+            sleep(seconds);
+        }
+        usleep((useconds_t)micros);
+    }
+
+return;
+} 
+
 void intra_character_wait(struct start_options options)
 {
 #ifdef CONSOLE_MORSE
     printf("~"); // Equal a single dot timing, not effected by Farnsworth timing.
 #endif
     // Set a timer and sleep for a single dot
-    usleep((useconds_t)options.dot_time_micro);
+    timer_wait(1, options.dot_time_seconds, options.dot_time_micro);
 }
 
 void inter_character_wait(struct start_options options)
@@ -31,9 +45,7 @@ void inter_character_wait(struct start_options options)
     }
 #endif
     // Set a timer and sleep for a 3 dots
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
+    timer_wait(3, options.inter_word_dot_time_seconds, options.inter_word_dot_time_micro);
     return;
 }
 
@@ -48,13 +60,7 @@ void word_wait(struct start_options options)
     fflush(stdout);
 #endif
     // Set a timer and sleep for a 7 dots
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
-    usleep((useconds_t)options.inter_word_dot_time_micro);
+    timer_wait(7, options.inter_word_dot_time_seconds, options.inter_word_dot_time_micro);
     return;
 }
 
@@ -65,9 +71,7 @@ void display_dash(struct start_options options)
     gpio_write(options.gpio_pi, (unsigned)options.port, ON);
 #endif
     // Set a timer and sleep for a three dots
-    usleep((useconds_t)options.dot_time_micro);
-    usleep((useconds_t)options.dot_time_micro);
-    usleep((useconds_t)options.dot_time_micro);
+    timer_wait(3, options.dot_time_seconds, options.dot_time_micro);
 #ifdef RASPBERRY_PI
     // Turn LED OFF NOW
     gpio_write(options.gpio_pi, (unsigned)options.port, OFF);
@@ -82,6 +86,7 @@ void display_dot(struct start_options options)
     gpio_write(options.gpio_pi,(unsigned)options.port, ON);
 #endif
     // Set a timer and sleep for a single dot
+    timer_wait(1, options.dot_time_seconds, options.dot_time_micro);
     usleep((useconds_t)options.dot_time_micro);
 #ifdef RASPBERRY_PI
     // Turn LED OFF NOW

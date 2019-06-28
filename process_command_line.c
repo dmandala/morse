@@ -95,13 +95,31 @@ void process_command_line(int argc, char *argv[], struct start_options *options)
     }
 
     if (options->timing_type == 'S'){
+        // dot time could be longer then 1 second which takes special handeling 
+        // because the timing fuctions do seconds and microseconds, but microseconds
+        // are less then 1 seconds worth, can't do 2 seconds in microseconds!!
         options->dot_time = SECONDS / (float)(options->speed * TOTAL_WORD_BITS);
-        options->inter_word_dot_time = options->dot_time;
-        options->dot_time_micro = options->inter_word_dot_time_micro = options->dot_time * TEN_E6; 
+        // Cast the float to int and drop the float part
+        options->dot_time_seconds = (unsigned int) options->dot_time;
+        // Not subtract the int from the float and drop the whole number 
+        options->dot_time -= options->dot_time_seconds;
+
+        options->inter_word_dot_time = SECONDS / (float)(options->speed * TOTAL_WORD_BITS);
+        options->inter_word_dot_time_seconds = (unsigned int) options->inter_word_dot_time;
+        options->inter_word_dot_time -= options->inter_word_dot_time_seconds;
+        // Calculate the microseconds for the utimer function
+        options->dot_time_micro = options->dot_time * TEN_E6;
+        options->inter_word_dot_time_micro = options->inter_word_dot_time * TEN_E6;
+         
     } else {
         options->dot_time = SECONDS / (float)(18 * TOTAL_WORD_BITS); // dot's are transmitted at 18 WPM
+        options->dot_time_seconds = (unsigned int) options->dot_time;
+        options->dot_time -= options->dot_time_seconds;
         options->dot_time_micro = options->dot_time * TEN_E6;
+
         options->inter_word_dot_time = (SECONDS-(options->dot_time*(float)(STANDARD_WORD_BITS*options->speed)))/(options->speed*FARNSWORTH_WORD_BITS);
+        options->inter_word_dot_time_seconds = (unsigned int) options->inter_word_dot_time;
+        options->inter_word_dot_time -= options->inter_word_dot_time_seconds;
         options->inter_word_dot_time_micro = options->inter_word_dot_time * TEN_E6;
     }
     return;

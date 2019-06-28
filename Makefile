@@ -15,11 +15,14 @@ LDFLAGS=-L/usr/local/lib
 #define x86_64
 #LIBS=-lm -lconfuse
 #endif
+
 # if buiding on ARM (Raspberry Pi) there is GPIO and need libs for it
 #ifeq ($(_ARCH),armv7l)
 #define RASPBERRY_PI
 #LIBS=-lm -lconfuse -lrt
+
 LIBS=-lm -lconfuse -lpigpiod_if2 -lrt
+
 #endif
 
 DEPS = morse.h
@@ -36,10 +39,16 @@ morse: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f *.o *~ core 
+	/bin/rm -f *.o *~ core 
 
 test:
 	./morse -l1 -s50 -tS -f./text_files/text.txt -p24
 
+install:
+#	/bin/cp morse /usr/local/bin/morse
+#	/bin/cp config_samples/etc_morsecode.cfg /etc/morsecode.cfg
+#	/bin/cp cp config_samples/dot_morsecode.cfg ~$(shell $SUDO_USER)/.morsecode.cfg.a
+#	/bin/chown $(shell $SUDO_USER):$(shell $SUDO_USER) ~$(shell $SUDO_USER)/.morsecode.cfg.a
+	/bin/echo $SUDO_USER
 
 all: clean morse test
