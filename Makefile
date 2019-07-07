@@ -39,16 +39,51 @@ morse: $(OBJ)
 .PHONY: clean
 
 clean:
-	/bin/rm -f *.o *~ core 
+	/bin/rm -f *.o *~ core
 
-test:
-	./morse -l1 -s50 -tS -f./text_files/text.txt -p24
+
+.PHONY: test5
+
+test5:
+	./morse -l1 -s5 -tS -f./text_files/text.txt -p8
+
+.PHONY: test10
+
+test10:
+	./morse -l1 -s10 -tS -f./text_files/text.txt -p8
+
+.PHONY: test15
+
+test15:
+	./morse -l2 -s15 -tS -f./text_files/text.txt -p8
+
+.PHONY: test20
+
+test20:
+	./morse -l4 -s20 -tS -f./text_files/text.txt -p8
+
+.PHONY: test30
+
+test30:
+	./morse -l4 -s30 -tS -f./text_files/text.txt -p8
+
+.PHONY: test50
+
+test50:
+	./morse -l6 -s50 -tS -f./text_files/text.txt -p8
+
+.PHONY: test75
+
+test75:
+	./morse -l8 -s75 -tS -f./text_files/text.txt -p8
+
+.PHONY: install
 
 install:
-#	/bin/cp morse /usr/local/bin/morse
-#	/bin/cp config_samples/etc_morsecode.cfg /etc/morsecode.cfg
-#	/bin/cp cp config_samples/dot_morsecode.cfg ~$(shell $SUDO_USER)/.morsecode.cfg.a
-#	/bin/chown $(shell $SUDO_USER):$(shell $SUDO_USER) ~$(shell $SUDO_USER)/.morsecode.cfg.a
-	/bin/echo $SUDO_USER
+	/bin/cp morse /usr/local/bin/morse
+	/bin/cp config_samples/etc_morsecode.cfg /etc/morsecode.cfg
+	/bin/cp config_samples/dot_morsecode.cfg /home/$$SUDO_USER/.morsecode.cfg
+	/bin/chown $$SUDO_USER:$$SUDO_USER /home/$$SUDO_USER/.morsecode.cfg
 
-all: clean morse test
+
+all: clean morse test20

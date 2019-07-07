@@ -1,2 +1,4 @@
-This is a new message that contains text to be converted into morse code,
-and push the test of the string to make it really really long.
+This is a new message that contains text to be converted into Morse code,
+and push the test of the string to make it really really long.  It's an
+example of some text to send as Morse code. I don't know if it wraps but
+I"m about to see I really hope it does.

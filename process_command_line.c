@@ -14,6 +14,24 @@
 #define SECONDS 60.0
 
 #define TEN_E6 1000000L
+
+void display_help(void)
+{
+    printf("Morse may be called with command line options\n\n");
+    printf("      -s Sets the speed of Morse Code in word per minute WPM, from 1 - 75\n");
+    printf("      -t Sets Standard Morse coding or Farnsworth Morse coding \"S or F\"\n");
+    printf("      -l Sets the loop count, 0 loops forever anything else upto 1000 loops that many times\n");
+    printf("      -p Sets the port used to activate the LED light. It's preset to 8\n");
+    printf("      -f Sets the text file to be set as Morse code. File paths are allowed\n\n");
+    printf("      -h or -H displays this text.\n");
+    printf(" morse -s5 -tS -l1 -fexample.txt\n");
+    printf("Sets the:\n    Speed at 5WPM\n    Standard Morse code timing\n    1 loop\n");
+    printf("    Uses the \"example.txt\" to be set via the LED light as Morse code flashes\n");
+    printf("\n\n");
+    printf("There is a .morsecode.cfg file in the users directory that can set these options as standard so \nyou don't have to set them each time.  You can use the text editor to edit the file.\n");
+    return;
+}
+
   
 void process_command_line(int argc, char *argv[], struct start_options *options)
 {
@@ -22,10 +40,15 @@ void process_command_line(int argc, char *argv[], struct start_options *options)
     // put ':' in the starting of the 
     // string so that program can  
     //distinguish between '?' and ':'  
-    while((opt = getopt(argc, argv, ":l:s:t:f:p:")) != -1)  
+    while((opt = getopt(argc, argv, ":f:Hhl:p:s:t:p:")) != -1)  
     {  
         switch(opt)  
         {  
+            case 'H':
+            case 'h':
+                display_help();
+                exit(-2);
+                break;
             case 'f':  
                 options->filename = optarg;
                 break;  
@@ -51,7 +74,8 @@ void process_command_line(int argc, char *argv[], struct start_options *options)
                 break;  
             case '?':  
                 printf("unknown option: %c\n", optopt);
-                exit(-1); 
+                display_help();
+                exit(-2); 
                 break;  
         }  
     }  
@@ -70,8 +94,8 @@ void process_command_line(int argc, char *argv[], struct start_options *options)
         printf("The file to open must be supplied on the command line either with -f filename or just filename\n");
         exit(-1);
     }      
-    if (options->speed < 1 || options->speed > 50) {
-        printf("Speed settings must be between 1 and 50 WPM, Speed requested was %d\n", options->speed);
+    if (options->speed < 1 || options->speed > 75) {
+        printf("Speed settings must be between 1 and 75 WPM, Speed requested was %d\n", options->speed);
         exit(-1);
     }
     if (!(options->timing_type =='F' || options->timing_type == 'S')){

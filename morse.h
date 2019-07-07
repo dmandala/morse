@@ -2,7 +2,7 @@
 #define MORSE_C
 
 #define RASPBERRY_PI
-#define CONSOLE_MORSE
+//#define CONSOLE_MORSE
 
 #include <stdio.h>
 #include <stdlib.h>
