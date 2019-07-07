@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <pwd.h>
 #include <sys/types.h>
+#include<signal.h>
 
 #include "morse.h"
 
@@ -36,8 +37,25 @@
 #include <pigpiod_if2.h>
 #endif
 
+static struct start_options options;
+
+#define OFF 0
+
+void sig_handler(int signo)
+{
+    if (signo == SIGINT){
+        close_text_file(options);
+#ifdef RASPBERRY_PI
+    // All done, close the gpio code
+        gpio_write(options.gpio_pi, (unsigned)options.port, OFF);
+        pigpio_stop(options.gpio_pi);
+#endif
+        exit(0);
+  }
+}
+
 int main(int argc, char* argv[]) {
-    struct start_options options;
+//    struct start_options options;
     // Set some sane values to the options struct.
     memset(&options, 0, sizeof(options));
     options.timing_type = 'S';
@@ -46,7 +64,11 @@ int main(int argc, char* argv[]) {
     options.inter_word_dot_time = options.dot_time;
     options.loop=0;
     options.port = 24;
-    
+
+    if (signal(SIGINT, sig_handler) == SIG_ERR){
+        printf("\ncan't catch SIGINT, exiting\n");
+        exit(-3);
+    }
     // get any and all config file options
     process_config_file(&options);
     // now process any command line arguments
