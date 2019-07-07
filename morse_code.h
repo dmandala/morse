@@ -1,22 +1,47 @@
 /*
-PARIS is 50 dot units long. 5 * PARIS is 5 WPM
+ * morse, it will display text files via Morse Code
+ *
+ * Copyright (C) 2019  David I. S. Mandala
+ *
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; version 2 of the License.
+ * 
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ *
+ * David I. S. Mandala davidm@them.com
+ * 120 E. FM 544
+ * Suite 72, BX 107
+ * Murphy, TX 75094
+ *
+ */
 
-Two types of timing: Standard where all timing is derived from the speed 
-of a '.' and Farnsworth code where the letters are sent at 18 WPM but the
-space between letters and words are stretched to the lower speed, above 
-18 WPM Farnsworth and stadard are the same, no extra shifting.
-
-This stretched code is called Farnsworth code.
-
-1) The length of a dot is 1 time unit.
-2) A dash is 3 time units.
-3) The space between symbols (dots and dashes) of the same letter is 1 time unit.
-4) The space between letters is 3 time units.
-5) The space between words is 7 time units.
-6) Words end with a space or /n
-
-Unless using Farnsworth timing, where 
-*/
+/*
+ * PARIS is 50 dot units long.  5 * PARIS is 5 WPM
+ *
+ * Two types of timing: Standard where all timing is derived from the speed
+ * of a '.' and Farnsworth code where the letters are sent at 18 WPM but the
+ * space between letters and words are stretched to the lower speed, above
+ * 18 WPM Farnsworth and stadard are the same, no extra shifting.
+ * 
+ * This stretched code is called Farnsworth code.
+ * 
+ * 1) The length of a dot is 1 time unit.
+ * 2) A dash is 3 time units.
+ * 3) The space between symbols (dots and dashes) of the same letter is 1 time unit.
+ * 4) The space between letters is 3 time units.
+ * 5) The space between words is 7 time units.
+ * 6) Words end with a space or /n
+ * 
+ * Unless using Farnsworth timing, where 
+ */
 
 /* For fast lookups, have made an array of strings that represent all the
  * morse char's by using the ascii letter to be sent as the array offset.
