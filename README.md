@@ -3,7 +3,7 @@ Morse
 
 ## The Story
 
-    I got a client that had a specific need that could not be met at the
+    I found a client that had a specific need that could not be met at the
     local electronics store or Amazon.  He wanted a portable device that
     could transmit paragraphs of text as Morse code at different speeds and
     loop forever.  He need both the hardware and the software to be solved.
