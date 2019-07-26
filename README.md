@@ -41,6 +41,7 @@ Morse
 
          A dot is one time unit.
          A dash is three dot time units.
+         A dot dot or dot dash or dash dash seperation is one dot time unit.
          A letter seperation is three dot time units.
          A word seperation is seven dot time units.
 
@@ -70,7 +71,7 @@ Morse
     Morse may be called with command line options.
           -s Sets the speed of Morse Code in word per minute WPM, from 1 - 75
           -t Sets Standard Morse coding or Farnsworth Morse coding \"S or F\"
-          -l Sets the loop count, 0 loops forever anything else up to 1000 loops that many times
+          -l ("lower case L") Sets the loop count, 0 loops forever anything else up to 1000 loops that many times
           -p Sets the port used to activate the LED light. It's preset to 8
           -f Sets the text file to be set as Morse code. File paths are allowed
           -h or -H displays this text.

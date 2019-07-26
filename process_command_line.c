@@ -40,13 +40,13 @@
 void display_help(void)
 {
     printf("Morse may be called with command line options\n\n");
-    printf("      -s Sets the speed of Morse Code in word per minute WPM, from 1 - 75\n");
-    printf("      -t Sets Standard Morse coding or Farnsworth Morse coding \"S or F\"\n");
-    printf("      -l Sets the loop count, 0 loops forever anything else upto 1000 loops that many times\n");
-    printf("      -p Sets the port used to activate the LED light. It's preset to 8\n");
-    printf("      -f Sets the text file to be set as Morse code. File paths are allowed\n\n");
-    printf("      -h or -H displays this text.\n");
-    printf(" morse -s5 -tS -l1 -fexample.txt\n");
+    printf("      -s Sets the speed of Morse Code in word per minute WPM, from 1 - 75.\n");
+    printf("      -t Sets Standard Morse coding or Farnsworth Morse coding \"S or F\".\n");
+    printf("      -l (\"lower case L\") Sets the loop count, 0 loops forever anything else up to 1000\n         loops that many times.\n");
+    printf("      -p Sets the port used to activate the LED light. It's preset to 8.\n");
+    printf("      -f Sets the text file to be set as Morse code. File paths are allowed (expected).\n");
+    printf("      -h or -H displays this text.\n\n");
+    printf(" \"$ morse -s5 -tS -l1 -fexample.txt\"\n");
     printf("Sets the:\n    Speed at 5WPM\n    Standard Morse code timing\n    1 loop\n");
     printf("    Uses the \"example.txt\" to be set via the LED light as Morse code flashes\n");
     printf("\n\n");
